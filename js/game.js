@@ -15,7 +15,6 @@ class Game {
 
     this.setKeyStates();
     this.listenKeyStates();
-
     this.setMusic();
 
     this.running = true;
