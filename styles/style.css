@@ -1,0 +1,17 @@
+body {
+  padding: 0;
+  text-align: center;
+  background-color: rgb(148, 67, 37);
+}
+
+.container {
+  background-color: white;
+  width: 80vw;
+  height: 700px;
+  margin: 0 auto;
+}
+
+#game-board {
+  float: left;
+  padding: 20px 0px;
+}
