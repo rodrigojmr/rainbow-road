@@ -28,8 +28,8 @@ class Game {
     layout3.map(platform => {
       const newPlatform = new Platform({
         ...platform,
-        x: platform.x - 70000, // 10000
-        y: platform.y + 500, // 400
+        x: platform.x, // 10000
+        y: platform.y, // 400
         game
       });
       this.platforms.push(newPlatform);
