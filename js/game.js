@@ -27,8 +27,10 @@ class Game {
     layout3.map(platform => {
       const newPlatform = new Platform({
         ...platform,
-        x: platform.x, // 10000
-        y: platform.y, // 400
+        // x: platform.x - 19600,
+        // y: platform.y + 9900,
+        x: platform.x, //
+        y: platform.y, //
         game
       });
       this.platforms.push(newPlatform);
@@ -45,7 +47,9 @@ class Game {
   setMusic() {
     const music = new Audio('./Rainbow Road.mp3');
     this.music = music;
-    this.music.currentTime = Math.abs(this.platforms[0].x) / this.speed / 60;
+    this.music.currentTime =
+      // Math.abs(this.platforms[0].x) / this.speed / 60 + 4.5;
+      this.music.currentTime = Math.abs(this.platforms[0].x) / this.speed / 60;
     this.music.play();
     const loseMusic = new Audio('./Lose.mp3');
     this.loseMusic = loseMusic;
@@ -96,13 +100,12 @@ class Game {
   }
 
   findSection(platforms) {
-    // debugger;
     // if (platforms.some(plat => plat.section === 1)) {
     // if (this.platforms[0].x < -11040 && this.platforms[0].x > -11100) {
-    // this.maxGameSpeed = 10;
-    // this.speed = 10;
-    // this.player.maxVerticalSpeed = 18;
-    // this.player.gravity = 1.4;
+    //   this.maxGameSpeed = 8;
+    //   this.speed = 8;
+    //   this.player.maxVerticalSpeed = 13;
+    //   this.player.gravity = 0.8;
     // }
     if (platforms.some(plat => plat.section === 2)) {
       // if (this.platforms[0].x < -11040 && this.platforms[0].x > -11100) {
@@ -114,6 +117,38 @@ class Game {
     if (platforms.some(plat => plat.section === 'end')) {
       // if (this.platforms[0].x < -11040 && this.platforms[0].x > -11100) {
       this.win();
+    }
+    if (
+      platforms.some(plat => plat.section === 'boostSection1') &&
+      this.player.ifPlatformUnderneath
+    ) {
+      this.player.maxVerticalSpeed = 15;
+      this.speed = 13;
+      this.maxGameSpeed = 13;
+      this.gravity = 1.4;
+    }
+    if (
+      platforms.some(plat => plat.section === 3) &&
+      this.player.ifPlatformUnderneath
+    ) {
+      this.player.maxVerticalSpeed = 6;
+      this.speed = 20;
+      this.maxGameSpeed = 20;
+      this.gravity = 1;
+    }
+    if (
+      platforms.some(plat => plat.section === 'jump') &&
+      this.player.ifPlatformUnderneath
+    ) {
+      this.debug;
+      this.player.maxVerticalSpeed = 20;
+    }
+    if (
+      platforms.some(plat => plat.section === 'resetJump') &&
+      this.player.ifPlatformUnderneath
+    ) {
+      this.debug;
+      this.player.maxVerticalSpeed = 6;
     }
   }
 
@@ -152,6 +187,7 @@ class Game {
     for (let platform of this.platforms) {
       platform.movePlatform();
     }
+    console.log(this.speed);
   }
 
   clean() {
@@ -173,7 +209,7 @@ class Game {
     this.context.font = '50px sans-serif';
     this.context.fillText(
       'Game Over!',
-      this.canvas.width / 2 - 70,
+      this.canvas.width / 2 - 150,
       this.canvas.height / 2
     );
   }
@@ -229,13 +265,16 @@ class Game {
   loop() {
     this.checkKeys();
     this.runLogic();
+    console.log(this.speed);
     if (this.running) {
       this.clean();
       this.paint();
+      // debugger;
+
       requestAnimationFrame(() => this.loop());
       // setTimeout(() => {
       //   this.loop();
-      // }, 1000 / 1);
+      // }, 1000 / 0.01);
     } else {
       return false;
     }
