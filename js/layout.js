@@ -830,7 +830,6 @@ const layout3 = layout.map((value, i, originalArray) => {
 //     x: acc.x + acc.width + cur.x
 //   });
 // });
-// console.log(layout);
 
 // const layout = [];
 // layout = layoutData.map((item, i, arr) => {

@@ -2,6 +2,7 @@ body {
   padding: 0;
   text-align: center;
   background-color: rgb(148, 67, 37);
+  font-family: 'Press Start 2P', cursive;
 }
 
 .container {
@@ -12,9 +13,9 @@ body {
   position: relative;
 }
 
-#game-board {
-  float: left;
-  padding: 20px 0px;
+.canvas {
+  opacity: 1;
+  transition: all 0.5s ease;
 }
 
 .start-menu {
@@ -27,12 +28,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.5s ease;
 }
-
 .start-button {
   border: none;
-  font-size: 50px;
-  background: linear-gradient(
+  background: none;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 3rem;
+  font-weight: 100;
+  letter-spacing: 2px;
+  text-align: center;
+  color: #f35626;
+  background-image: -webkit-linear-gradient(
     124deg,
     #ff2400,
     #e81d1d,
@@ -44,57 +51,44 @@ body {
     #dd00f3,
     #dd00f3
   );
-  background-size: 100% 100%;
-  font-family: 'Press Start 2P', cursive;
-  -webkit-animation: rainbow 18s ease infinite;
-  -z-animation: rainbow 18s ease infinite;
-  -o-animation: rainbow 18s ease infinite;
-  animation: rainbow 18s ease infinite;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-animation: hue 5s infinite linear;
+}
+.start-button:focus {
+  outline: none;
+  -webkit-boder-image: -webkit-linear-gradient
+    (
+      linear,
+      left top,
+      left bottom,
+      #ff2400,
+      #e81d1d,
+      #e8b71d,
+      #e3e81d,
+      #1de840,
+      #1ddde8,
+      #2b1de8,
+      #dd00f3,
+      #dd00f3
+    );
 }
 
-@-webkit-keyframes rainbow {
-  0% {
-    background-position: 0% 82%;
+.start-text {
+}
+
+@-webkit-keyframes hue {
+  from {
+    -webkit-filter: hue-rotate(0deg);
   }
-  50% {
-    background-position: 100% 19%;
-  }
-  100% {
-    background-position: 0% 82%;
+  to {
+    -webkit-filter: hue-rotate(-360deg);
   }
 }
-@-moz-keyframes rainbow {
-  0% {
-    background-position: 0% 82%;
-  }
-  50% {
-    background-position: 100% 19%;
-  }
-  100% {
-    background-position: 0% 82%;
-  }
+
+.visuallyhidden {
+  opacity: 0;
 }
-@-o-keyframes rainbow {
-  0% {
-    background-position: 0% 82%;
-  }
-  50% {
-    background-position: 100% 19%;
-  }
-  100% {
-    background-position: 0% 82%;
-  }
-}
-@keyframes rainbow {
-  0% {
-    background-position: 0% 82%;
-  }
-  50% {
-    background-position: 100% 19%;
-  }
-  100% {
-    background-position: 0% 82%;
-  }
+.hidden {
+  display: none;
 }

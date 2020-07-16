@@ -187,7 +187,6 @@ class Game {
     for (let platform of this.platforms) {
       platform.movePlatform();
     }
-    console.log(this.speed);
   }
 
   clean() {
@@ -265,7 +264,6 @@ class Game {
   loop() {
     this.checkKeys();
     this.runLogic();
-    console.log(this.speed);
     if (this.running) {
       this.clean();
       this.paint();
