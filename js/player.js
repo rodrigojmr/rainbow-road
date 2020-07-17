@@ -127,6 +127,9 @@ class Player {
   }
 
   checkBoundaries(platforms) {
+    // if (platforms[0] !== undefined) {
+    //   console.log(platforms[0].i);
+    // }
     if (
       !this.ifPlatformUnderneath &&
       this.state !== 'jumping' &&

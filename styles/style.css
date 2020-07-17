@@ -6,11 +6,27 @@ body {
 }
 
 .container {
-  background-color: white;
-  width: 80vw;
-  max-width: 1400px;
-  margin: 0 auto;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  width: 80vw;
+  max-width: 1200px;
+  background-color: white;
+
+  border: 5px solid transparent;
+  border-image: linear-gradient(
+    to bottom right,
+    #b827fc 0%,
+    #2c90fc 25%,
+    #b8fd33 50%,
+    #fec837 75%,
+    #fd1892 100%
+  );
+  border-image-slice: 1;
 }
 
 .canvas {
@@ -21,10 +37,9 @@ body {
 .start-menu {
   background-color: #fff;
   position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  top: 50%;
+  /* left: 50%; */
+  transform: translate((-50%, -50%));
   display: flex;
   align-items: center;
   justify-content: center;

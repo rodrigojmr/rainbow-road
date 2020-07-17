@@ -4,10 +4,14 @@ class Platform {
   }
 
   movePlatform() {
-    if (this.game.player.x > 350) {
+    if (
+      this.game.player.x >= 350 &&
+      !this.game.player.state.includes('boost')
+    ) {
       this.x -= this.game.speed;
-    } else if (this.game.player.x > 450) {
-      this.x -= 20;
+    }
+    if (this.game.player.x > 350) {
+      this.x -= 10;
     }
     if (this.game.player.state !== 'boost') {
       this.x -= this.game.speed;
@@ -30,7 +34,7 @@ class Platform {
       this.y += 3;
     }
     if (this.game.player.y <= 200) {
-      this.y += 4;
+      this.y -= 1;
     }
 
     // if (!this.game.player.state.includes('boost')) {

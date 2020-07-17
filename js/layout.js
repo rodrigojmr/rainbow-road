@@ -23,7 +23,7 @@ const layout = [
   },
   {
     id: 'platform',
-    x: 20,
+    x: 0,
     y: -110,
     width: 100,
     height: 20
@@ -39,7 +39,7 @@ const layout = [
     id: 'floor',
     x: 100,
     y: 190,
-    width: 560,
+    width: 550,
     height: 300
   },
   {
@@ -65,16 +65,16 @@ const layout = [
   },
   {
     id: 'platform',
-    x: 80,
-    y: 100,
+    x: 50,
+    y: 80,
     width: 90,
     height: 20
   },
   {
     id: 'floor',
-    x: 100,
+    x: 80,
     y: 190,
-    width: 480,
+    width: 500,
     height: 300
   },
   {
@@ -116,68 +116,70 @@ const layout = [
     id: 'platform',
     x: 0,
     y: 0,
-    width: 240,
+    width: 400,
     height: 20
   },
   {
     id: 'platform',
-    x: 80,
-    y: -100,
+    x: 60,
+    y: -110,
     width: 120,
     height: 20
   },
   {
+    section: 'jumpS',
     id: 'platform',
-    x: 90,
-    y: -140,
+    x: 60,
+    y: -110,
     width: 120,
     height: 20
   },
   {
+    section: 'resetJump1',
     id: 'floor',
-    x: 120,
-    y: -100,
-    width: 650,
+    x: 300,
+    y: 400,
+    width: 400,
     height: 500
   },
   {
     id: 'platform',
-    x: 100,
-    y: 20,
-    width: 70,
+    x: 180,
+    y: 40,
+    width: 100,
     height: 20
   },
   {
     id: 'platform',
-    x: 90,
-    y: 20,
-    width: 70,
-    height: 20
-  },
-  {
-    id: 'platform',
-    x: 90,
-    y: 20,
-    width: 70,
+    x: 130,
+    y: 40,
+    width: 100,
     height: 20
   },
   {
     id: 'floor',
-    x: 90,
-    y: 60,
+    x: 60,
+    y: 80,
     width: 500,
     height: 500
   },
   {
     id: 'platform',
-    x: 80,
-    y: -100,
+    x: 70,
+    y: -110,
+    width: 90,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 70,
+    y: -110,
     width: 90,
     height: 20
   },
   {
     id: 'floor',
-    x: 140,
+    x: 120,
     y: -60,
     width: 900,
     height: 500
@@ -755,45 +757,129 @@ const layout = [
     section: 3,
     id: 'platform',
     x: 500,
-    y: -50,
-    width: 650,
+    y: 50,
+    width: 400,
     height: 20
   },
   {
     id: 'platform',
-    x: 350,
+    x: 325,
     y: 0,
-    width: 150,
+    width: 175,
     height: 20
   },
   {
     id: 'platform',
-    x: 270,
+    x: 225,
     y: 0,
-    width: 150,
+    width: 175,
     height: 20
   },
   {
     section: 'jump',
     id: 'platform',
-    x: 225,
+    x: 175,
     y: 0,
-    width: 150,
+    width: 175,
     height: 20
   },
   {
     id: 'obstacle',
-    x: 180,
+    x: 200,
     y: 0,
-    width: 860,
+    width: 420,
     height: 1000
   },
   {
-    section: 'resetJump',
+    section: 4,
     id: 'platform',
-    x: 100,
-    y: -20,
+    x: 150,
+    y: 50,
     width: 300,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 80,
+    y: -60,
+    width: 200,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 80,
+    y: 60,
+    width: 650,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 80,
+    y: 60,
+    width: 300,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 80,
+    y: -60,
+    width: 300,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 80,
+    y: -60,
+    width: 1300,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 80,
+    y: 60,
+    width: 300,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 80,
+    y: 60,
+    width: 300,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 80,
+    y: 60,
+    width: 300,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 80,
+    y: 60,
+    width: 1000,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 80,
+    y: 60,
+    width: 300,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 80,
+    y: -60,
+    width: 300,
+    height: 20
+  },
+  {
+    id: 'platform',
+    x: 80,
+    y: -60,
+    width: 1700,
     height: 20
   }
 ];
@@ -862,7 +948,7 @@ const layout3 = layout.map((value, i, originalArray) => {
 // {
 //   id: 'boostPlatRight',
 //   x: 800,
-//   y: 200,
+//   y: 400,
 //   width: 60,
 //   height: 120
 // },
