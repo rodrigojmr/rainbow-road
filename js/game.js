@@ -33,14 +33,14 @@ class Game {
       const newPlatform = new Platform({
         ...platform,
         i: index,
-        x: platform.x - 42800,
-        y: platform.y + 14750,
+        // x: platform.x - 42800,
+        // y: platform.y + 14750,
         // x: platform.x - 10300,
         // y: platform.y,
         // x: platform.x - 6600, //
         // y: platform.y + 200, //
-        // x: platform.x, //
-        // y: platform.y, //
+        x: platform.x, //
+        y: platform.y, //
         game
       });
       this.platforms.push(newPlatform);
