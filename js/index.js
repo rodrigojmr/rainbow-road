@@ -7,6 +7,7 @@ window.onload = () => {
     const container = document.querySelector('.start-menu');
     const startButton = document.querySelector('.start-text');
     const startTune = new Audio('./start.mp3');
+    const restartButton = document.querySelector('.restart-button');
     startButton.addEventListener('click', e => {
       e.preventDefault();
       container.classList.add('visuallyhidden');
@@ -31,6 +32,7 @@ window.onload = () => {
         game.loop();
       }, 1000); // 1000
     });
+
     // setTimeout(() => {
     //   const game = new Game(canvasElement);
     //   game.loop(0);

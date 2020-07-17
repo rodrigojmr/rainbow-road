@@ -17,6 +17,7 @@ class Game {
     this.listenKeyStates();
     this.setMusic();
     this.loadFont();
+    this.setRestartButton();
 
     this.running = true;
     this.lost = false;
@@ -73,6 +74,13 @@ class Game {
     };
     this.keys = keys;
   }
+
+  setRestartButton() {
+    const restartButton = document.querySelector('.restart-button');
+    this.restartButton = restartButton;
+    restartButton.addEventListener('click', this.restart.bind(this));
+  }
+
   loadFont() {
     const font = new FontFace(
       '2P',
@@ -323,7 +331,36 @@ class Game {
     this.music.pause();
     this.music.currentTime = 0;
     this.loseMusic.play();
+
+    this.restartButton.classList.remove('hidden');
+    this.restartButton.classList.add('visuallyhidden');
+
+    setTimeout(() => {
+      this.restartButton.classList.remove('visuallyhidden');
+    }, 400);
+
     this.running = false;
+
+    debugger;
+  }
+
+  restart() {
+    this.restartButton.classList.remove('visuallyhidden');
+    this.restartButton.classList.add('hidden');
+
+    this.loseMusic.pause();
+    this.loseMusic.currentTime = 0;
+    this.music.currentTime = 0;
+    this.music.play();
+
+    // this.player.x += this.platforms[0].x;
+    // this.player.y += this.platforms[0].y;
+
+    this.running = true;
+    this.platforms.splice(0, this.platforms.length);
+    this.debug();
+    this.clean();
+    this.loop(0);
   }
 
   loop(timestamp) {
