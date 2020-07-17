@@ -16,8 +16,13 @@ class Game {
     this.setKeyStates();
     this.listenKeyStates();
     this.setMusic();
+    this.loadFont();
 
     this.running = true;
+    this.lost = false;
+    this.timestamp = 0;
+    this.deltaTimestamp = 0;
+    this.previousTimestamp = 0;
   }
 
   debug() {
@@ -26,8 +31,8 @@ class Game {
       const newPlatform = new Platform({
         ...platform,
         i: index,
-        // x: platform.x - 39300,
-        // y: platform.y + 9150,
+        // x: platform.x - 42800,
+        // y: platform.y + 14750,
         // x: platform.x - 10300,
         // y: platform.y,
         // x: platform.x - 6600, //
@@ -50,12 +55,13 @@ class Game {
   setMusic() {
     const music = new Audio('./Rainbow Road.mp3');
     this.music = music;
+    this.music.currentTime =
+      Math.abs(this.platforms[0].x) / this.speed / 60 - 17.8;
     // this.music.currentTime =
-    //   Math.abs(this.platforms[0].x) / this.speed / 60 - 17.8;
-    this.music.currentTime = Math.abs(this.platforms[0].x) / this.speed / 60;
+    //   Math.abs(this.platforms[0].x) / this.speed / 60 - 14;
     this.music.play();
-    // const loseMusic = new Audio('./Lose.mp3');
-    // this.loseMusic = loseMusic;
+    const loseMusic = new Audio('./Lose.mp3');
+    this.loseMusic = loseMusic;
   }
 
   setKeyStates() {
@@ -66,6 +72,15 @@ class Game {
       40: false
     };
     this.keys = keys;
+  }
+  loadFont() {
+    const font = new FontFace(
+      '2P',
+      'url(https://fonts.gstatic.com/s/pressstart2p/v8/e3t4euO8T-267oIAQAu6jDQyK3nYivN04w.woff2)'
+    );
+    font.load().then(() => {
+      this.font = font;
+    });
   }
 
   listenKeyStates() {
@@ -117,10 +132,6 @@ class Game {
       this.player.maxVerticalSpeed = 13;
       this.player.gravity = 1.4;
     }
-    if (platforms.some(plat => plat.section === 'end')) {
-      // if (this.platforms[0].x < -11040 && this.platforms[0].x > -11100) {
-      this.win();
-    }
     if (
       platforms.some(plat => plat.section === 'boostSection') &&
       this.player.ifPlatformUnderneath
@@ -149,7 +160,6 @@ class Game {
       platforms.some(plat => plat.section === 3) &&
       this.player.ifPlatformUnderneath
     ) {
-      // debugger;
       this.player.maxVerticalSpeed = 9;
       this.speed = 15;
       this.maxGameSpeed = 14;
@@ -210,40 +220,28 @@ class Game {
     if (platforms.some(plat => plat.section === 'finalBoost')) {
       this.speed = 22;
       this.maxGameSpeed = 22;
+      this.player.maxVerticalSpeed = 16;
+      if (this.player.y > 300) {
+        this.player.y += this.player.maxVerticalSpeed;
+      }
+    }
+    if (platforms.some(plat => plat.section === 'end')) {
+      if (this.speed > 0) {
+        this.speed -= 0.2;
+      }
+      if (this.speed < 0.5) {
+        this.speed = 0;
+      }
+
+      if (this.player.x < this.canvas.width / 2 - this.player.width) {
+        this.player.x += 1;
+      }
     }
   }
 
-  cleanPlatforms() {
-    // if (this.platforms[0].x + this.platforms[0].width < -200) {
-    //   this.platforms.shift();
-    // }
-  }
-
-  // window.addEventListener('keydown', event => {
-  //   const key = event.key;
-  //   switch (key) {
-  //     case 'ArrowLeft':
-  //       event.preventDefault();
-  //       this.player.executeMove('left');
-  //       break;
-  //     case 'ArrowRight':
-  //       event.preventDefault();
-  //       this.player.executeMove('right');
-  //       break;
-  //     case 'ArrowUp':
-  //       event.preventDefault();
-  //       this.player.executeMove('up');
-  //       break;
-  //     case 'ArrowDown':
-  //       event.preventDefault();
-  //       this.player.executeMove('down');
-  //       break;
-  //   }
-  // });
-  // }
-
-  runLogic() {
-    this.cleanPlatforms();
+  runLogic(timestamp) {
+    this.previousTimestamp = timestamp;
+    this.deltaTimestamp = timestamp - this.previousTimestamp;
     this.player.runLogic();
     for (let platform of this.platforms) {
       platform.movePlatform();
@@ -255,7 +253,13 @@ class Game {
   }
 
   paint() {
-    this.player.paint();
+    if (this.player.state === 'falling' || this.player.state === 'running') {
+      this.player.paint();
+    } else {
+      this.player.hue++;
+      this.player.paintJump();
+    }
+
     for (let platform of this.platforms) {
       platform.paint();
     }
@@ -281,7 +285,7 @@ class Game {
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.restore();
 
-    this.context.font = '100px sans-serif';
+    this.context.font = '10px 2P';
     var gradient = this.context.createLinearGradient(
       0,
       this.canvas.height / 2,
@@ -318,19 +322,18 @@ class Game {
     this.paintLose();
     this.music.pause();
     this.music.currentTime = 0;
-    // this.loseMusic.play();
+    this.loseMusic.play();
     this.running = false;
   }
 
-  loop() {
+  loop(timestamp) {
     this.checkKeys();
-    this.runLogic();
+    this.runLogic(timestamp);
     if (this.running) {
       this.clean();
       this.paint();
-      // debugger;
 
-      requestAnimationFrame(() => this.loop());
+      requestAnimationFrame(timestamp => this.loop(timestamp));
       // setTimeout(() => {
       //   this.loop();
       // }, 1000 / 0.01);

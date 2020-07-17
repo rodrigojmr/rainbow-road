@@ -1036,9 +1036,9 @@ const layout = [
   {
     section: 'finalBoost',
     id: 'boost',
-    x: 300,
-    y: 0,
-    width: 50,
+    x: 100,
+    y: 500,
+    width: 10,
     height: 500
   },
   {
@@ -1051,9 +1051,80 @@ const layout = [
   {
     id: 'boostPlatRight',
     x: 0,
-    y: -2800,
+    y: -6200,
     width: 50,
-    height: 2200
+    height: 5700
+  },
+  {
+    id: 'boostPlatLeft',
+    x: -250,
+    y: -500,
+    width: 50,
+    height: 5500
+  },
+  {
+    id: 'obstacleVertLeft',
+    x: -1,
+    y: -450,
+    width: 50,
+    height: 450
+  },
+  {
+    id: 'obstacleVertRight',
+    x: 100,
+    y: 4200,
+    width: 50,
+    height: 120
+  },
+  {
+    id: 'obstacleVertLeft',
+    x: -150,
+    y: -250,
+    width: 50,
+    height: 120
+  },
+  {
+    id: 'obstacleVertRight',
+    x: 100,
+    y: -300,
+    width: 50,
+    height: 120
+  },
+  {
+    id: 'obstacleVertLeft',
+    x: -150,
+    y: -750,
+    width: 50,
+    height: 120
+  },
+  {
+    id: 'obstacleVertRight',
+    x: 100,
+    y: -250,
+    width: 50,
+    height: 120
+  },
+  {
+    id: 'obstacleVertLeft',
+    x: -150,
+    y: -300,
+    width: 50,
+    height: 120
+  },
+  {
+    id: 'obstacleVertRight',
+    x: 100,
+    y: -900,
+    width: 50,
+    height: 300
+  },
+  {
+    section: 'end',
+    id: 'platform',
+    x: 600,
+    y: -300,
+    width: 4000,
+    height: 2000
   }
 ];
 

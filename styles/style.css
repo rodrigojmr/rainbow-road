@@ -1,7 +1,7 @@
 body {
   padding: 0;
   text-align: center;
-  background-color: rgb(148, 67, 37);
+  background-color: rgb(22, 22, 22);
   font-family: 'Press Start 2P', cursive;
 }
 
@@ -34,7 +34,8 @@ body {
   transition: all 0.5s ease;
 }
 
-.start-menu {
+.start-menu,
+.end-screen {
   background-color: #fff;
   position: absolute;
   top: 50%;
@@ -45,7 +46,8 @@ body {
   justify-content: center;
   transition: all 0.5s ease;
 }
-.start-button {
+.start-text,
+.end-text {
   border: none;
   background: none;
   font-family: 'Press Start 2P', cursive;
@@ -89,9 +91,6 @@ body {
     );
 }
 
-.start-text {
-}
-
 @-webkit-keyframes hue {
   from {
     -webkit-filter: hue-rotate(0deg);
@@ -101,9 +100,17 @@ body {
   }
 }
 
+.end-screen {
+  display: flex;
+  flex-direction: column;
+  top: 20%;
+}
+
 .visuallyhidden {
   opacity: 0;
+  visibility: hidden;
 }
+
 .hidden {
   display: none;
 }

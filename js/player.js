@@ -11,13 +11,30 @@ class Player {
     this.state = 'running';
     this.ifPlatformUnderneath = true;
     this.jumpingPoint = 500;
+    this.boundaryTimestamp = 0;
+    this.hue = 0;
   }
 
   paint() {
     const context = this.game.context;
     context.save();
+    context.fillStyle = '#fff';
+    context.fillRect(this.x, this.y, this.width, this.height);
+    context.strokeStyle = '#000';
+    context.lineWidth = 2;
+    context.strokeRect(this.x, this.y, this.width, this.height);
+    context.restore();
+  }
 
-    context.fillStyle = '#4251f5';
+  paintJump() {
+    const context = this.game.context;
+    context.save();
+    if (this.hue === 360) {
+      this.hue = 0;
+      this.hue++;
+    } else this.hue++;
+
+    context.fillStyle = `hsl(${this.hue}, 100%, 70%)`;
     context.fillRect(this.x, this.y, this.width, this.height);
     context.restore();
   }
@@ -114,10 +131,10 @@ class Player {
         return (
           platform.x < this.x && platform.x + platform.width >= this.x - 50
         );
-      } else if (platform.id === 'obstacleVertRightt') {
+      } else if (platform.id === 'obstacleVertRight') {
         return (
           platform.x + platform.width > this.x + this.width &&
-          platform.x < this.x + this.width + 50
+          platform.x <= this.x + this.width + 30
         );
       }
     });
@@ -127,6 +144,7 @@ class Player {
         platform.y + 50 > this.y + this.height &&
         platform.x + platform.width > this.x + 10
     );
+    this.checkIfOutOfBounds(platforms);
     this.checkBoundaries(platforms);
     this.game.findSection(platforms);
     // if (platforms.find(e => e.id.includes('finalBoost'))) {
@@ -134,11 +152,22 @@ class Player {
     // }
   }
 
+  checkIfOutOfBounds(platforms) {
+    if (
+      !platforms.length ||
+      !platforms.find(plat => plat.y < this.y + 1000 || plat.y > this.y - 1000)
+    ) {
+      if (!this.boundaryTimestamp) {
+        this.boundaryTimestamp = this.game.timestamp;
+      } else {
+        if (this.game.timestamp > this.boundaryTimestamp + 3000) {
+          alert('test');
+        }
+      }
+    }
+  }
+
   checkBoundaries(platforms) {
-    // if (platforms[0] !== undefined) {
-    //   console.log(platforms[0].i);
-    // }
-    console.log(platforms);
     if (
       !this.ifPlatformUnderneath &&
       this.state !== 'jumping' &&
@@ -156,6 +185,13 @@ class Player {
         this.y = platform.y - this.height;
         this.verticalSpeed = 0;
         this.state = 'running';
+      } else if (
+        platform.id === 'floor' &&
+        this.y > platform.y &&
+        this.x > platform.x &&
+        this.x < platform.x + platform.width
+      ) {
+        this.game.lose();
       }
 
       if (platform.id === 'platform') {
@@ -203,6 +239,9 @@ class Player {
         ) {
           this.state = 'boost';
           this.game.speed = this.game.maxGameSpeed;
+          setTimeout(() => {
+            if (!platforms.length) this.game.lose();
+          }, 1000);
         } else if (
           // Colision lose Check
           this.x > platform.x &&
@@ -233,6 +272,9 @@ class Player {
           this.game.speed === 0
         ) {
           this.game.speed = -Math.abs(this.game.maxGameSpeed);
+          setTimeout(() => {
+            this.game.lose();
+          }, 200);
         }
       }
       if (
@@ -246,20 +288,18 @@ class Player {
       if (
         platform.id === 'obstacleVertLeft' &&
         this.x <= platform.x + platform.width + 60 &&
-        ((this.y + this.width / 4 < platform.y + platform.height &&
+        ((this.y < platform.y + platform.height &&
           this.y > platform.y + platform.height - 30) ||
-          (this.y + this.height < platform.y &&
-            this.y + this.height > platform.y + platform.height - 15))
+          (this.y < platform.y && this.y + this.height > platform.y - 15))
       ) {
         this.game.lose(); // return false;
       }
       if (
         platform.id === 'obstacleVertRight' &&
         this.x + this.width >= platform.x + platform.width - 60 &&
-        ((this.y <= platform.y + platform.height &&
-          this.y > platform.y + platform.height - 60) ||
-          (this.y + this.height < platform.y &&
-            this.y + this.height > platform.y + platform.height - 15))
+        ((this.y < platform.y + platform.height &&
+          this.y > platform.y + platform.height - 30) ||
+          (this.y < platform.y && this.y + this.height > platform.y - 15))
       ) {
         this.game.lose(); // return false;
       }

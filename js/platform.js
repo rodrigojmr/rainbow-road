@@ -65,8 +65,6 @@ class Platform {
     // }
   }
 
-  removePlatforms() {}
-
   paint() {
     const context = this.game.context;
     if (
@@ -74,6 +72,7 @@ class Platform {
       (this.y < this.game.canvas.height || this.y + this.height > 0)
     ) {
       if (this.id === 'floor') {
+        context.save();
         context.fillStyle = '#000';
         context.fillRect(
           Math.floor(this.x),
@@ -81,8 +80,10 @@ class Platform {
           this.width,
           this.height
         );
+        context.restore();
       }
       if (this.id === 'platform') {
+        context.save();
         context.fillStyle = '#4287f5';
         context.fillRect(
           Math.floor(this.x),
@@ -90,7 +91,9 @@ class Platform {
           this.width,
           this.height
         );
+        context.restore();
       } else if (this.id === 'boost') {
+        context.save();
         context.fillStyle = '#d9d621';
         context.fillRect(
           Math.floor(this.x),
@@ -98,7 +101,9 @@ class Platform {
           this.width,
           this.height
         );
+        context.restore();
       } else if (this.id === 'boostPlatRight' || this.id === 'boostPlatLeft') {
+        context.save();
         context.fillStyle = '#a30a19';
         context.fillRect(
           Math.floor(this.x),
@@ -106,7 +111,9 @@ class Platform {
           this.width,
           this.height
         );
+        context.restore();
       } else if (this.id === 'obstacle') {
+        context.save();
         context.fillStyle = '#cc0c26';
         for (let i = 0; i < this.width / 30; i++) {
           context.beginPath();
@@ -125,7 +132,10 @@ class Platform {
           this.width,
           this.height
         );
+        context.restore();
       } else if (this.id === 'obstacleVertLeft') {
+        context.save();
+
         context.fillStyle = '#cc0c26';
         for (let i = 0; i < Math.floor(this.height / 60); i++) {
           context.beginPath();
@@ -150,32 +160,36 @@ class Platform {
           this.width,
           this.height
         );
-      }
-    } else if (this.id === 'obstacleRight') {
-      context.fillStyle = '#cc0c26';
-      for (let i = 0; i < Math.floor(this.height / 60); i++) {
-        context.beginPath();
-        context.moveTo(
+        context.restore();
+      } else if (this.id === 'obstacleVertRight') {
+        context.save();
+
+        context.fillStyle = '#cc0c26';
+        for (let i = 0; i < Math.floor(this.height / 60); i++) {
+          context.beginPath();
+          context.moveTo(
+            Math.floor(this.x),
+            Math.floor(this.y + this.height) - i * 60
+          );
+          context.lineTo(
+            Math.floor(this.x) - 45,
+            Math.floor(this.y + this.height) - i * 60 - 30
+          );
+          context.lineTo(
+            Math.floor(this.x),
+            Math.floor(this.y + this.height) - i * 60 - 60
+          );
+          context.fill();
+        }
+        context.fillStyle = '#cc0c26';
+        context.fillRect(
           Math.floor(this.x),
-          Math.floor(this.y + this.height) - i * 60
+          Math.floor(this.y),
+          this.width,
+          this.height
         );
-        context.lineTo(
-          Math.floor(this.x) - 45,
-          Math.floor(this.y + this.height) - i * 60 - 30
-        );
-        context.lineTo(
-          Math.floor(this.x),
-          Math.floor(this.y + this.height) - i * 60 - 60
-        );
-        context.fill();
+        context.restore();
       }
-      context.fillStyle = '#cc0c26';
-      context.fillRect(
-        Math.floor(this.x),
-        Math.floor(this.y),
-        this.width,
-        this.height
-      );
     }
   }
 }
