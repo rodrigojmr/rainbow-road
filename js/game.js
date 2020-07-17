@@ -20,6 +20,7 @@ class Game {
     this.setRestartButton();
 
     this.running = true;
+    this.finished = false;
     this.lost = false;
     this.timestamp = 0;
     this.deltaTimestamp = 0;
@@ -32,14 +33,14 @@ class Game {
       const newPlatform = new Platform({
         ...platform,
         i: index,
-        // x: platform.x - 42800,
-        // y: platform.y + 14750,
+        x: platform.x - 42800,
+        y: platform.y + 14750,
         // x: platform.x - 10300,
         // y: platform.y,
         // x: platform.x - 6600, //
         // y: platform.y + 200, //
-        x: platform.x, //
-        y: platform.y, //
+        // x: platform.x, //
+        // y: platform.y, //
         game
       });
       this.platforms.push(newPlatform);
@@ -126,13 +127,6 @@ class Game {
   }
 
   findSection(platforms) {
-    // if (platforms.some(plat => plat.section === 1)) {
-    // if (this.platforms[0].x < -11040 && this.platforms[0].x > -11100) {
-    //   this.maxGameSpeed = 8;
-    //   this.speed = 8;
-    //   this.player.maxVerticalSpeed = 13;
-    //   this.player.gravity = 0.8;
-    // }
     if (platforms.some(plat => plat.section === 2)) {
       // if (this.platforms[0].x < -11040 && this.platforms[0].x > -11100) {
       this.maxGameSpeed = 10;
@@ -243,6 +237,18 @@ class Game {
 
       if (this.player.x < this.canvas.width / 2 - this.player.width) {
         this.player.x += 1;
+      }
+      if (!this.finished) {
+        this.finished = true;
+        setTimeout(() => {
+          // debugger;
+          const endScreen = document.querySelector('.end-screen');
+          endScreen.classList.add('visuallyhidden');
+          endScreen.classList.remove('hidden');
+          setTimeout(() => {
+            endScreen.classList.remove('visuallyhidden');
+          }, 500);
+        }, 7000);
       }
     }
   }
