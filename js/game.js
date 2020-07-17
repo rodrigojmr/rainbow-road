@@ -26,14 +26,14 @@ class Game {
       const newPlatform = new Platform({
         ...platform,
         i: index,
-        x: platform.x - 39300,
-        y: platform.y + 9150,
+        // x: platform.x - 39300,
+        // y: platform.y + 9150,
         // x: platform.x - 10300,
         // y: platform.y,
         // x: platform.x - 6600, //
         // y: platform.y + 200, //
-        // x: platform.x, //
-        // y: platform.y, //
+        x: platform.x, //
+        y: platform.y, //
         game
       });
       this.platforms.push(newPlatform);
@@ -50,9 +50,9 @@ class Game {
   setMusic() {
     const music = new Audio('./Rainbow Road.mp3');
     this.music = music;
-    this.music.currentTime =
-      Math.abs(this.platforms[0].x) / this.speed / 60 - 17.8;
-    // this.music.currentTime = Math.abs(this.platforms[0].x) / this.speed / 60;
+    // this.music.currentTime =
+    //   Math.abs(this.platforms[0].x) / this.speed / 60 - 17.8;
+    this.music.currentTime = Math.abs(this.platforms[0].x) / this.speed / 60;
     this.music.play();
     // const loseMusic = new Audio('./Lose.mp3');
     // this.loseMusic = loseMusic;
