@@ -34,6 +34,6 @@ window.onload = () => {
     setTimeout(() => {
       const game = new Game(canvasElement);
       game.loop();
-    }, 500); // 1000
+    }, 1200); // 1000
   });
 };

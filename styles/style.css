@@ -107,3 +107,8 @@ body {
 .hidden {
   display: none;
 }
+
+.center {
+  font-size: 0.8rem;
+  margin-top: 20px;
+}
