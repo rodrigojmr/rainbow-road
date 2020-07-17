@@ -157,6 +157,7 @@ class Player {
       !platforms.length ||
       !platforms.find(plat => plat.y < this.y + 1000 || plat.y > this.y - 1000)
     ) {
+      // console.log('this.game.timestamp: ', this.game.timestamp);
       if (!this.boundaryTimestamp) {
         this.boundaryTimestamp = this.game.timestamp;
       } else {

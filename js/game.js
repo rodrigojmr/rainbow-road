@@ -32,7 +32,6 @@ class Game {
     layout3.map((platform, index, originalArray) => {
       const newPlatform = new Platform({
         ...platform,
-        i: index,
         // x: platform.x - 42800,
         // y: platform.y + 14750,
         // x: platform.x - 10300,
@@ -173,6 +172,7 @@ class Game {
       this.player.ifPlatformUnderneath
     ) {
       this.player.maxVerticalSpeed = 23;
+      this.player.gravity = 1.2;
     }
     if (
       platforms.some(plat => plat.section === 4) &&
@@ -241,7 +241,6 @@ class Game {
       if (!this.finished) {
         this.finished = true;
         setTimeout(() => {
-          // debugger;
           const endScreen = document.querySelector('.end-screen');
           endScreen.classList.add('visuallyhidden');
           endScreen.classList.remove('hidden');
@@ -346,8 +345,6 @@ class Game {
     }, 400);
 
     this.running = false;
-
-    debugger;
   }
 
   restart() {
