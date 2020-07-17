@@ -67,6 +67,8 @@ class Player {
         this.y = 550;
         this.y -= this.verticalSpeed;
         this.verticalSpeed -= 0.3;
+      } else if (this.y < 300) {
+        this.y++;
       }
       if (this.verticalSpeed < -15) {
         this.verticalSpeed = -15;
@@ -78,10 +80,13 @@ class Player {
     }
 
     // Prevent player from going further than certain point
-    if (this.x > 100 && !this.game.player.state.includes('boost')) {
+    if (this.x > 100 && !this.state.includes('boost')) {
       this.x -= this.game.speed * 0.75;
     } else if (this.x > 700) {
       this.x -= this.game.speed * 2;
+    }
+    if (this.y < 350 && this.state.includes('boost')) {
+      this.y += 10;
     }
   }
 
@@ -124,12 +129,16 @@ class Player {
     );
     this.checkBoundaries(platforms);
     this.game.findSection(platforms);
+    // if (platforms.find(e => e.id.includes('finalBoost'))) {
+    //   this.game.
+    // }
   }
 
   checkBoundaries(platforms) {
     // if (platforms[0] !== undefined) {
     //   console.log(platforms[0].i);
     // }
+    console.log(platforms);
     if (
       !this.ifPlatformUnderneath &&
       this.state !== 'jumping' &&

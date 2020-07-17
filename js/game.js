@@ -26,14 +26,14 @@ class Game {
       const newPlatform = new Platform({
         ...platform,
         i: index,
-        // x: platform.x - 21700,
-        // y: platform.y + 9400,
+        x: platform.x - 39300,
+        y: platform.y + 9150,
         // x: platform.x - 10300,
         // y: platform.y,
         // x: platform.x - 6600, //
         // y: platform.y + 200, //
-        x: platform.x, //
-        y: platform.y, //
+        // x: platform.x, //
+        // y: platform.y, //
         game
       });
       this.platforms.push(newPlatform);
@@ -51,8 +51,8 @@ class Game {
     const music = new Audio('./Rainbow Road.mp3');
     this.music = music;
     this.music.currentTime =
-      // Math.abs(this.platforms[0].x) / this.speed / 60 + 26;
-      this.music.currentTime = Math.abs(this.platforms[0].x) / this.speed / 60;
+      Math.abs(this.platforms[0].x) / this.speed / 60 - 17.8;
+    // this.music.currentTime = Math.abs(this.platforms[0].x) / this.speed / 60;
     this.music.play();
     // const loseMusic = new Audio('./Lose.mp3');
     // this.loseMusic = loseMusic;
@@ -122,7 +122,7 @@ class Game {
       this.win();
     }
     if (
-      platforms.some(plat => plat.section === 'boostSection1') &&
+      platforms.some(plat => plat.section === 'boostSection') &&
       this.player.ifPlatformUnderneath
     ) {
       this.player.maxVerticalSpeed = 15;
@@ -170,6 +170,46 @@ class Game {
       this.speed = 16;
       this.maxGameSpeed = 16;
       this.player.gravity = 0.9;
+    }
+    if (
+      platforms.some(plat => plat.section === 5) &&
+      this.player.ifPlatformUnderneath
+    ) {
+      this.player.maxVerticalSpeed = 9;
+      this.speed = 18;
+      this.maxGameSpeed = 18;
+      this.player.gravity = 1;
+    }
+    if (
+      platforms.some(plat => plat.section === 'jumpXS') &&
+      this.player.ifPlatformUnderneath
+    ) {
+      this.player.maxVerticalSpeed = 12;
+    }
+    if (
+      platforms.some(plat => plat.section === '5 reset') &&
+      this.player.ifPlatformUnderneath
+    ) {
+      this.speed = 18;
+      this.maxGameSpeed = 18;
+      this.player.maxVerticalSpeed = 9;
+      this.player.gravity = 1;
+    }
+    if (
+      platforms.some(plat => plat.section === 'jumpXS2') &&
+      this.player.ifPlatformUnderneath
+    ) {
+      this.player.maxVerticalSpeed = 14;
+    }
+    if (
+      platforms.some(plat => plat.section === 'jumpXS2') &&
+      this.player.ifPlatformUnderneath
+    ) {
+      this.player.maxVerticalSpeed = 14;
+    }
+    if (platforms.some(plat => plat.section === 'finalBoost')) {
+      this.speed = 22;
+      this.maxGameSpeed = 22;
     }
   }
 
@@ -283,12 +323,6 @@ class Game {
   }
 
   loop() {
-    // if (this.player.y < 300) {
-    //   debugger;
-    // }
-    // if (this.player.y < 200) {
-    //   debugger;
-    // }
     this.checkKeys();
     this.runLogic();
     if (this.running) {

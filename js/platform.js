@@ -9,8 +9,7 @@ class Platform {
       !this.game.player.state.includes('boost')
     ) {
       this.x -= this.game.speed;
-    }
-    if (this.game.player.x > 350) {
+    } else if (this.game.player.x > 475) {
       this.x -= 10;
     }
     if (this.game.player.state !== 'boost') {
@@ -29,12 +28,16 @@ class Platform {
       } else {
         this.y -= -2;
       }
-    }
-    if (this.game.player.y <= 300) {
+    } else if (this.game.player.y <= 300) {
       this.y += 3;
-    }
-    if (this.game.player.y <= 200) {
-      this.y -= 1;
+    } else if (this.game.player.y <= 200) {
+      if (this.game.player.state.includes('boost')) {
+        this.y += this.player.maxVerticalSpeed;
+      } else {
+        this.y -= 2;
+      }
+
+      // this.game.player.y + 60;
     }
 
     // if (!this.game.player.state.includes('boost')) {
