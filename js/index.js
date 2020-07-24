@@ -1,7 +1,10 @@
 window.onload = () => {
   setTimeout(() => {
     const canvasElement = document.querySelector('.canvas');
-    canvasElement.style.width = '100%';
+    // canvasElement.width = window.innerWidth ;
+    canvasElement.height = window.innerHeight - window.innerHeight / 10;
+    // canvasElement.style.width = '100%';
+    canvasElement.width = window.innerWidth - 10 - window.innerWidth / 5;
     canvasElement.style.height = '100%';
     const container = document.querySelector('.start-menu');
     const startButton = document.querySelector('.start-text');

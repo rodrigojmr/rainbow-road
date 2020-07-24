@@ -369,6 +369,7 @@ class Game {
   loop(timestamp) {
     this.checkKeys();
     this.runLogic(timestamp);
+    console.log(this.player.y);
     if (this.running) {
       this.clean();
       this.paint();

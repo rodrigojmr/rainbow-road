@@ -102,8 +102,10 @@ class Player {
     } else if (this.x > 700) {
       this.x -= this.game.speed * 2;
     }
-    if (this.y < 350 && this.state.includes('boost')) {
-      this.y += 10;
+    if (this.y < 550 && this.state.includes('boost')) {
+      this.y += 2;
+    } else if (this.y < 450 && this.state.includes('boost')) {
+      this.y += 6;
     }
   }
 
