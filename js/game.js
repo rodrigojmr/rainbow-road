@@ -126,6 +126,13 @@ class Game {
   }
 
   findSection(platforms) {
+    if (platforms.some(plat => plat.section === 0)) {
+      // if (this.platforms[0].x < -11040 && this.platforms[0].x > -11100) {
+      this.speed = 8; // 8
+      this.maxGameSpeed = 8;
+      this.player.maxVerticalSpeed = 13;
+      this.player.gravity = 0.8;
+    }
     if (platforms.some(plat => plat.section === 2)) {
       // if (this.platforms[0].x < -11040 && this.platforms[0].x > -11100) {
       this.maxGameSpeed = 10;
@@ -337,6 +344,11 @@ class Game {
     this.music.currentTime = 0;
     this.loseMusic.play();
 
+    this.speed = 0;
+    this.maxGameSpeed = 8;
+    this.player.maxVerticalSpeed = 13;
+    this.player.gravity = 0.8;
+
     this.restartButton.classList.remove('hidden');
     this.restartButton.classList.add('visuallyhidden');
 
@@ -350,19 +362,21 @@ class Game {
   restart() {
     this.restartButton.classList.remove('visuallyhidden');
     this.restartButton.classList.add('hidden');
+    this.clean();
 
     this.loseMusic.pause();
     this.loseMusic.currentTime = 0;
     this.music.currentTime = 0;
     this.music.play();
 
-    // this.player.x += this.platforms[0].x;
-    // this.player.y += this.platforms[0].y;
+    // this.speed = 0;
+    // this.player.maxVerticalSpeed = 0;
+    // this.player.verticalSpeed = 0;
+    this.player.y -= 150;
 
     this.running = true;
     this.platforms.splice(0, this.platforms.length);
     this.debug();
-    this.clean();
     this.loop(0);
   }
 

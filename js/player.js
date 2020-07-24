@@ -237,14 +237,14 @@ class Player {
           // Keep moving if miss platform/jump
           ((this.y > platform.y + platform.height &&
             this.y < platform.y + platform.height + 300) ||
-            (this.y < platform.y && this.y > platform.y - 100)) &&
+            (this.y < platform.y && this.y > platform.y - 300)) &&
           this.game.speed === 0
         ) {
           this.state = 'boost';
           this.game.speed = this.game.maxGameSpeed;
           setTimeout(() => {
-            if (!platforms.length) this.game.lose();
-          }, 1000);
+            if (this.x > platform.x + platform.width) this.game.lose();
+          }, 500);
         } else if (
           // Colision lose Check
           this.x > platform.x &&
@@ -270,14 +270,14 @@ class Player {
         } else if (
           // Keep moving if miss platform/jump
           ((this.y > platform.y + platform.height &&
-            this.y < platform.y + platform.height + 100) ||
-            (this.y < platform.y && this.y > platform.y - 100)) &&
+            this.y < platform.y + platform.height + 300) ||
+            (this.y < platform.y && this.y > platform.y - 300)) &&
           this.game.speed === 0
         ) {
           this.game.speed = -Math.abs(this.game.maxGameSpeed);
           setTimeout(() => {
-            this.game.lose();
-          }, 200);
+            if (this.x < platform.x) this.game.lose();
+          }, 500);
         }
       }
       if (
