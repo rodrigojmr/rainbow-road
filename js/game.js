@@ -130,6 +130,7 @@ class Game {
       // if (this.platforms[0].x < -11040 && this.platforms[0].x > -11100) {
       this.speed = 8; // 8
       this.maxGameSpeed = 8;
+      this.speed = 8;
       this.player.maxVerticalSpeed = 13;
       this.player.gravity = 0.8;
     }

@@ -5,10 +5,10 @@ const layout = [
     id: 'floor',
     x: 0,
     y: 500,
-    width: 500,
+    width: 1000,
     height: 300
   },
-  { i: 1, id: 'floor', x: 0, y: 0, width: 2600, height: 300 },
+  { i: 1, id: 'floor', x: 0, y: 0, width: 2100, height: 300 },
   { i: 2, id: 'obstacle', x: 0, y: 0, width: 90, height: 300 },
   { i: 3, id: 'platform', x: 0, y: -110, width: 100, height: 20 },
   { i: 4, id: 'platform', x: 60, y: -90, width: 100, height: 20 },
@@ -188,9 +188,9 @@ const layout = [
     i: 96,
     id: 'boostPlatLeft',
     x: -140,
-    y: -1500,
+    y: -1900,
     width: 50,
-    height: 1500
+    height: 1900
   },
   {
     i: 97,
