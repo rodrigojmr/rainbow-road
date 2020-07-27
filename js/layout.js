@@ -8,7 +8,7 @@ const layout = [
     width: 500,
     height: 300
   },
-  { i: 1, id: 'floor', x: 0, y: 0, width: 2500, height: 300 },
+  { i: 1, id: 'floor', x: 0, y: 0, width: 2600, height: 300 },
   { i: 2, id: 'obstacle', x: 0, y: 0, width: 90, height: 300 },
   { i: 3, id: 'platform', x: 0, y: -110, width: 100, height: 20 },
   { i: 4, id: 'platform', x: 60, y: -90, width: 100, height: 20 },

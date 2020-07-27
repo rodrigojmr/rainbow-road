@@ -243,7 +243,11 @@ class Player {
           this.state = 'boost';
           this.game.speed = this.game.maxGameSpeed;
           setTimeout(() => {
-            if (this.x > platform.x + platform.width) this.game.lose();
+            if (
+              this.x > platform.x + platform.width &&
+              !platforms.some(platform)
+            )
+              this.game.lose();
           }, 500);
         } else if (
           // Colision lose Check
@@ -276,7 +280,8 @@ class Player {
         ) {
           this.game.speed = -Math.abs(this.game.maxGameSpeed);
           setTimeout(() => {
-            if (this.x < platform.x) this.game.lose();
+            if (this.x < platform.x && !platforms.some(platform))
+              this.game.lose();
           }, 500);
         }
       }
