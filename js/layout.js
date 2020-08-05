@@ -271,7 +271,7 @@ const layout = [
     id: 'platform',
     x: 500,
     y: 50,
-    width: 350,
+    width: 700,
     height: 20
   },
   { i: 108, id: 'platform', x: 325, y: 0, width: 175, height: 20 },
