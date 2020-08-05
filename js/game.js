@@ -126,11 +126,10 @@ class Game {
   }
 
   findSection(platforms) {
-    if (platforms.some(plat => plat.section === 0)) {
+    if (platforms.some(plat => plat.section === 1)) {
       // if (this.platforms[0].x < -11040 && this.platforms[0].x > -11100) {
       this.speed = 8; // 8
       this.maxGameSpeed = 8;
-      this.speed = 8;
       this.player.maxVerticalSpeed = 13;
       this.player.gravity = 0.8;
     }
@@ -369,6 +368,8 @@ class Game {
     this.loseMusic.currentTime = 0;
     this.music.currentTime = 0;
     this.music.play();
+    this.speed = 8;
+    this.maxGameSpeed = 8;
 
     // this.speed = 0;
     // this.player.maxVerticalSpeed = 0;
