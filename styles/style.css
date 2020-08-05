@@ -11,6 +11,7 @@ body {
   text-align: center;
   background-color: rgb(22, 22, 22);
   font-family: 'Press Start 2P', cursive;
+  color: white;
 }
 
 .container {
@@ -34,6 +35,8 @@ body {
     #fd1892 100%
   );
   border-image-slice: 1;
+
+  margin-bottom: 1rem;
 }
 
 .canvas {
